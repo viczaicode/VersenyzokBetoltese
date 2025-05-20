@@ -4,6 +4,13 @@
  */
 package nezet;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import modell.Versenyzo;
+
 /**
  *
  * @author ViczaiPéterMilán(Szf
@@ -13,6 +20,8 @@ public class Menu extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
+    private Versenyzo modell;
+    
     public Menu() {
         initComponents();
     }
@@ -26,6 +35,8 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -39,8 +50,13 @@ public class Menu extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        mnuPrgFix = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+
+        jMenuItem4.setText("jMenuItem4");
+
+        jMenuItem5.setText("jMenuItem5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,6 +77,11 @@ public class Menu extends javax.swing.JFrame {
         jTextField4.setEditable(false);
 
         jButton1.setText("Betöltés");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Konfig");
 
@@ -69,6 +90,14 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuItem2.setText("Reset");
         jMenu1.add(jMenuItem2);
+
+        mnuPrgFix.setText("valami");
+        mnuPrgFix.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuPrgFixActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuPrgFix);
 
         jMenuBar1.add(jMenu1);
 
@@ -132,6 +161,30 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            String sor = Files.readString(Path.of("versenyzok.txt"));
+            modell = new Versenyzo(sor);
+            //modell = new Versenyzo(nev,email,pontSzam,mezSzam);
+            
+            jTextField1.setText(modell.getNev());
+            jTextField2.setText(modell.getEmail());
+            jTextField3.setText( "" + modell.getPontszam());
+            jTextField4.setText( "" + modell.getMez());
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void mnuPrgFixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuPrgFixActionPerformed
+        Versenyzo modell2 = new Versenyzo("Róka rudi", "rk@a.hu", 3.14, 21);
+        jTextField1.setText(modell2.getNev());
+        jTextField2.setText(modell2.getEmail());
+        jTextField3.setText( "" + modell2.getPontszam());
+        jTextField4.setText( "" + modell2.getMez());
+        
+    }//GEN-LAST:event_mnuPrgFixActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -179,9 +232,12 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JMenuItem mnuPrgFix;
     // End of variables declaration//GEN-END:variables
 }

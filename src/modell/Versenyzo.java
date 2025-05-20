@@ -4,6 +4,9 @@
  */
 package modell;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 
 
 public class Versenyzo {
@@ -18,6 +21,15 @@ public class Versenyzo {
         this.setEmail(email);
         this.setPontszam(pontszam);
         this.setMez(mez);
+    }
+    
+    public Versenyzo(String sor) {
+        String[] adatok = sor.split(" ");
+        this.nev = adatok[0];
+        this.email = adatok[1];
+        this.pontszam = Double.parseDouble(adatok[2]);
+        this.mez = Integer.parseInt(adatok[3]);
+        
     }
 
     public String getNev() {
